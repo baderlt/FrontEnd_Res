@@ -1,14 +1,71 @@
-import { FormEvent, useState } from "react";
+import { Box, Button, Step, StepButton, Stepper, Typography } from "@mui/material";
+import React, { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 
+const steps= ['Add user Info', 'Add info about Restaurant'];
+
 const Register: React.FC = () => {
+
   const [Email, setEmail] = useState<string | undefined>();
   const [Password, setPassword] = useState<string | undefined>();
   const [C_Password, setC_Password] = useState<string | undefined>();
-  const [step,Setstep]=useState<number>(1);
+  const [step,Setstep]=useState<number>(0);
+
+  const handleRegister=()=>{
+    return true;
+  }
+
   const Next_Step = () => {
+    if(step >=1){
+        handleRegister();
+       }else{
    Setstep(step+1);
+       }
   };
+
+  ////////////////////////////////
+  const [activeStep, setActiveStep] = useState<number>(0);
+  const [completed, setCompleted] = useState<{[k: number]: boolean;}>({});
+
+  const totalSteps = () => {
+    return steps.length;
+  };
+
+  const completedSteps = () => {
+    return Object.keys(completed).length;
+  };
+
+  const isLastStep = () => {
+    return activeStep === totalSteps() - 1;
+  };
+
+  const allStepsCompleted = () => {
+    return completedSteps() === totalSteps();
+  };
+
+  const handleNext = () => {
+    const newActiveStep =
+      isLastStep() && !allStepsCompleted()
+        ? // It's the last step, but not all steps have been completed,
+          // find the first step that has been completed
+          steps.findIndex((step, i) => !(i in completed))
+        : activeStep + 1;
+    setActiveStep(newActiveStep);
+  };
+
+
+  const handleStep = (step: number) => () => {
+    setActiveStep(step);
+  };
+
+  const handleComplete = () => {
+    const newCompleted = completed;
+    newCompleted[activeStep] = true;
+    setCompleted(newCompleted);
+    handleNext();
+  };
+
+
   return (
     <>
       <>
@@ -21,14 +78,28 @@ const Register: React.FC = () => {
             />
           </div>
 
-          <div className="flex md:w-1/2 justify-center py-10 items-center bg-white">
-            <form className="bg-white" onSubmit={Next_Step}>
+          <div className="flex  w-full   justify-center py-10 items-center bg-white">
+            <form className="bg-white w-full p-[20%]"  onSubmit={Next_Step}>
 
-                
+
             <h1 className="text-gray-800 font-bold text-2xl mb-1">Hello !</h1>
             <p className="text-sm font-normal text-gray-600 mb-7">
               Welcome To<b> Order Up..!</b>{" "}
             </p>
+            <Box sx={{ width: '100%',marginBottom:'40px' }}>
+      <Stepper nonLinear activeStep={activeStep}>
+        {steps.map((label, index) => (
+          <Step key={label} completed={completed[index]}>
+            <StepButton color="inherit" onClick={handleStep(index)}>
+              {label}
+            </StepButton>
+          </Step>
+        ))}
+      </Stepper>
+    </Box>
+    
+    {activeStep ==0   ?  <>
+ 
               <button className="flex justify-center items-center hover:bg-green-200 border-2 h-12  rounded-md bg-green-100 border-gray-600 p-2 w-full  ">
                 <img
                   src="icon-google.png"
@@ -127,11 +198,12 @@ const Register: React.FC = () => {
                   required
                 />
               </div>
+              </>:""}
               <button
                 type="submit"
-                className="block w-full bg-blue-500  mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
+                className="block w-full bg-blue-500  mt-4 py-2 rounded-2xl text-white font-semibold mb-2" onClick={()=>{handleComplete();handleNext()}}
               >
-                Next
+                {activeStep ==0  ?  "Next" :"Create"}
               </button>
 
               <span className="text-sm ml-2  hover:text-blue-500 cursor-pointer">

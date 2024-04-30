@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 import { Suspense } from "react";
 import Login from "./Pages/login";
 import Register from "./Pages/register";

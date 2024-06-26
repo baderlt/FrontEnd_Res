@@ -64,12 +64,10 @@ const Register: React.FC = () => {
             />
           </div>
 
-          <div className="flex  w-full   justify-center py-10 items-center bg-white">
-            <form className="bg-white w-full p-[20%]" >
-              <h1 className="text-gray-800 font-bold text-2xl mb-1">Hello !</h1>
-              <p className="text-sm font-normal text-gray-600 mb-7">
-                Welcome To<b> Order Up..!</b>{" "}
-              </p>
+          <div className="flex  w-full h-full items-center ">
+            <form className="bg-white w-full px-[20%]" >
+                                <p className="text-sm font-normal flex justify-center items-center text-gray-600 "><img src="logo_app.png" width={80} height={80} alt=" logo app " /></p>
+                        <p className=" font-normal flex justify-center items-center text-gray-600 mb-7 text-xl"><b>Order Up</b></p>
               <Box sx={{ width: "100%", marginBottom: "30px" }}>
                 <Stepper nonLinear activeStep={activeStep}>
                   {steps.map((label, index) => (

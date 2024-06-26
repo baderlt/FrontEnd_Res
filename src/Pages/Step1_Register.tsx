@@ -54,24 +54,26 @@ const Step1_Register:React.FC<Step1RegisterProps>=({handleComplete})=>{
     return (
         <>
    <>
-                  <button className="flex justify-center items-center hover:bg-green-200 border-2 h-11  rounded-md bg-green-100 border-gray-600 p-2 w-full  ">
+              <div className="flex justify-center gap-6 items-center ">
+                  <button className="flex justify-center items-center hover:bg-green-200 border-2 h-11  rounded-md bg-green-100 border-gray-400 p-2 w-30  ">
                     <img
                       src="icon-google.png"
                       alt="Google"
                       width={30}
                       height={30}
                     />{" "}
-                    &ensp;Continue with google
+
                   </button>
-                  <button className="flex justify-center items-center mt-2 hover:bg-blue-200 border-2 h-11 rounded-md bg-blue-100 border-gray-600 p-2 w-full mb-4 ">
+                  <button className="flex justify-center items-center  hover:bg-blue-200 border-2 h-11 rounded-md bg-blue-100 border-gray-400 p-2 w-30  ">
                     <img
                       src="icon_facebook.png"
-                      alt="Google"
+                      alt="facebook"
                       width={30}
                       height={30}
                     />{" "}
-                    &ensp;Continue with facebook
+
                   </button>
+                  </div>
                   <p className="flex justify-between items-center mt-2 mb-4"><hr className="w-[46%] text-black bg-black" />
                    or 
                     <hr className="w-[46%] text-black bg-black" />
